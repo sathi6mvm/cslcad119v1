@@ -2445,22 +2445,30 @@
           console.error('occtimportjs not loaded');
           return parts;
         }
+
         const loadModule = async () => {
-          if (!window._occtModule) {
-            window._occtModule = await occtimportjs({
-              locateFile: (file) => './js/lib/' + file
-            });
+          if (window._occtModule) return window._occtModule;
+          if (!window._occtModulePromise) {
+            window._occtModulePromise = (async () => {
+              try {
+                window._occtModule = await occtimportjs({
+                  locateFile: (file) => './js/lib/' + file
+                });
+                return window._occtModule;
+              } catch (err) {
+                window._occtModule = null;
+                throw err;
+              } finally {
+                if (!window._occtModule) {
+                  window._occtModulePromise = null;
+                }
+              }
+            })();
           }
-          return window._occtModule;
+          return await window._occtModulePromise;
         };
 
-        const timeoutMs = 15000;
-        const mod = await Promise.race([
-          loadModule(),
-          new Promise((_, reject) => setTimeout(() => reject(new Error('occt-import-js initialization timeout')), timeoutMs))
-        ]);
-
-        const occt = mod;
+        const timeoutMs = 30000;
         const uint8 = fileBuffer instanceof Uint8Array
           ? fileBuffer
           : new Uint8Array(fileBuffer instanceof ArrayBuffer ? fileBuffer : await fileBuffer.arrayBuffer());
@@ -2469,18 +2477,43 @@
         const isIges = lname.endsWith('.igs') || lname.endsWith('.iges');
 
         let res = null;
-        try {
-          res = await Promise.race([
-            (async () => {
-              if (isIges && typeof occt.ReadIgesFile === 'function') return occt.ReadIgesFile(uint8);
-              if (typeof occt.ReadStepFile === 'function') return occt.ReadStepFile(uint8);
-              if (typeof occt.tessellateSTEP === 'function') return await occt.tessellateSTEP(uint8);
-              return null;
-            })(),
-            new Promise((_, reject) => setTimeout(() => reject(new Error(`STEP/IGES parse timeout for ${fileName || 'file'}`)), timeoutMs))
-          ]);
-        } catch (e) {
-          console.warn('collectStepParts: parser call timed out or failed', e);
+        for (let attempt = 1; attempt <= 2; attempt++) {
+          try {
+            const mod = await Promise.race([
+              loadModule(),
+              new Promise((_, reject) => setTimeout(() => reject(new Error('occt-import-js initialization timeout')), timeoutMs))
+            ]);
+
+            const occt = mod;
+            res = await Promise.race([
+              (async () => {
+                if (isIges && typeof occt.ReadIgesFile === 'function') return occt.ReadIgesFile(uint8);
+                if (typeof occt.ReadStepFile === 'function') return occt.ReadStepFile(uint8);
+                if (typeof occt.tessellateSTEP === 'function') return await occt.tessellateSTEP(uint8);
+                return null;
+              })(),
+              new Promise((_, reject) => setTimeout(() => reject(new Error(`STEP/IGES parse timeout for ${fileName || 'file'}`)), timeoutMs))
+            ]);
+
+            if (res && ((Array.isArray(res) && res.length > 0) || (res.meshes && res.meshes.length > 0) || (res.root && res.root.meshes && res.root.meshes.length > 0))) {
+              break;
+            }
+            if (res && res.success === false) {
+              console.warn('collectStepParts: parser reported unsuccessful import', res);
+              break;
+            }
+          } catch (e) {
+            console.warn(`collectStepParts: attempt ${attempt} failed`, e);
+            if (attempt === 2) {
+              return parts;
+            }
+            window._occtModule = null;
+            window._occtModulePromise = null;
+          }
+        }
+
+        if (!res) {
+          console.warn('collectStepParts: no result returned from occt-import-js', res);
           return parts;
         }
 
@@ -2963,6 +2996,8 @@
               return null;
             }
           });
+
+          if (e.target) e.target.value = '';
 
           const results = await Promise.all(filePromises);
           const validResults = results.filter(r => r !== null);

@@ -1,3 +1,32 @@
+function normalizeRemoteFileUrl(url) {
+    if (typeof url !== 'string') return url;
+    const trimmed = url.trim();
+    if (!trimmed) return trimmed;
+
+    try {
+        const parsed = new URL(trimmed);
+        const host = parsed.hostname.toLowerCase();
+        const pathParts = parsed.pathname.split('/').filter(Boolean);
+
+        if ((host === 'github.com' || host === 'www.github.com') && pathParts.length >= 4) {
+            const blobIndex = pathParts.indexOf('blob');
+            if (blobIndex >= 0 && pathParts.length > blobIndex + 3) {
+                const owner = pathParts[0];
+                const repo = pathParts[1];
+                const ref = pathParts[blobIndex + 1];
+                const filePath = pathParts.slice(blobIndex + 2).join('/');
+                if (owner && repo && ref && filePath) {
+                    return `https://raw.githubusercontent.com/${owner}/${repo}/${ref}/${filePath}`;
+                }
+            }
+        }
+    } catch (err) {
+        console.warn('normalizeRemoteFileUrl failed for', url, err);
+    }
+
+    return trimmed;
+}
+
 const ProjectManager = {
     tree: [],
     selectedFiles: [],
@@ -449,7 +478,8 @@ const ProjectManager = {
                                 fileData = new File([blob], item.name, { type: blob.type });
                             } else if (item.path) {
                                 const apiBase = (window.APP_CONFIG && window.APP_CONFIG.apiBase) || '/';
-                                const url = (item.path.startsWith('http') || item.path.startsWith('/') || item.path.startsWith('file://')) ? item.path : apiBase + item.path;
+                                const rawUrl = (item.path.startsWith('http') || item.path.startsWith('/') || item.path.startsWith('file://')) ? item.path : apiBase + item.path;
+                                const url = normalizeRemoteFileUrl(rawUrl);
                                 if (window.AndroidProjectBridge && typeof window.AndroidProjectBridge.readFileDataUrl === 'function' && (url.startsWith('file://') || url.startsWith('/'))) {
                                     const dataUrl = window.AndroidProjectBridge.readFileDataUrl(item.path || url);
                                     if (dataUrl) {
@@ -459,7 +489,10 @@ const ProjectManager = {
                                     }
                                 }
                                 if (!fileData) {
-                                    const response = await fetch(url);
+                                    const response = await fetch(url, { cache: 'no-store' });
+                                    if (!response.ok) {
+                                        throw new Error(`Failed to fetch ${url}: ${response.status}`);
+                                    }
                                     const blob = await response.blob();
                                     fileData = new File([blob], item.name, { type: blob.type || 'application/octet-stream' });
                                 }
