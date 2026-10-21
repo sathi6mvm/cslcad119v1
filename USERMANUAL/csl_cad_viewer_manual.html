@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSL CAD VIEWER - Comprehensive User Manual</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f4f4f4; margin: 0; padding: 0; }
+        .page { background: white; max-width: 800px; margin: 20px auto; padding: 40px; box-shadow: 0 0 10px rgba(0,0,0,0.1); page-break-after: always; }
+        h1, h2, h3 { color: #003366; }
+        .header { text-align: center; border-bottom: 2px solid #003366; padding-bottom: 10px; margin-bottom: 20px; }
+        .footer { text-align: center; font-size: 0.8em; color: #777; margin-top: 30px; border-top: 1px solid #ddd; padding-top: 10px; }
+        img { max-width: 100%; height: auto; border: 1px solid #ccc; margin: 15px 0; display: block; }
+        .note { background: #e9f5ff; border-left: 4px solid #005b9f; padding: 10px; margin: 15px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #003366; color: white; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <h1>CSL CAD VIEWER</h1>
+            <p>Official User Manual for Naval Architecture & Shipbuilding</p>
+        </div>
+        <h2>1. Introduction</h2>
+        <p>Welcome to the <strong>CSL CAD VIEWER</strong>. Designed specifically for the rigorous demands of Cochin Shipyard Ltd., this cross-platform application allows engineers and draftsmen to view, analyze, and inspect critical 2D drawings and complex 3D hull models.</p>
+        <p><strong>Platform Compatibility:</strong> Fully optimized for Desktop PCs running Windows 8 and above, as well as Android Tablets (Android 10.0+) for on-the-go inspections in the dry dock.</p>
+        <img src="images/01-main-interface.png" alt="Main Interface">
+        <p><em>Figure 1: Main Application Interface</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 1</div>
+    </div>
+
+    <div class="page">
+        <h2>2. Supported File Formats</h2>
+        <p>The CSL CAD VIEWER supports the industry-standard formats required for naval engineering and structural modeling. The supported formats, loaded sequentially via our optimized pipeline, are:</p>
+        <table>
+            <tr><th>Format</th><th>Description</th></tr>
+            <tr><td>.3dd</td><td>Custom 3D project files</td></tr>
+            <tr><td>.dxf</td><td>2D/3D Drawing Exchange Format</td></tr>
+            <tr><td>.3dcsl</td><td>Proprietary Cochin Shipyard CAD format</td></tr>
+            <tr><td>.step / .stp</td><td>Standard for the Exchange of Product model data</td></tr>
+            <tr><td>.3dm</td><td>Rhino 3D Model files</td></tr>
+            <tr><td>.igs / .iges</td><td>Initial Graphics Exchange Specification</td></tr>
+            <tr><td>.stl</td><td>Stereolithography / 3D printing format</td></tr>
+        </table>
+        <img src="images/02-supported-formats.png" alt="Supported Formats">
+        <p><em>Figure 2: Supported File Formats Menu</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 2</div>
+    </div>
+
+    <div class="page">
+        <h2>3. Navigation (Windows PC)</h2>
+        <p>When operating the CSL CAD VIEWER on a Windows 8+ workstation, use standard mouse controls to inspect structural blocks and piping layouts:</p>
+        <ul>
+            <li><strong>Orbit (Rotate):</strong> Click and hold the Left Mouse Button, then drag to rotate around the hull.</li>
+            <li><strong>Pan (Move):</strong> Click and hold the Right Mouse Button and drag to move the camera laterally.</li>
+            <li><strong>Zoom:</strong> Use the Mouse Scroll Wheel to zoom in on specific weld joints or bulkheads.</li>
+        </ul>
+        <img src="images/03-pc-navigation.png" alt="PC Navigation">
+        <p><em>Figure 3: PC Mouse Navigation</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 3</div>
+    </div>
+
+    <div class="page">
+        <h2>4. Navigation (Android Tablets)</h2>
+        <p>For field engineers using Android tablets on the shipyard floor, the viewer utilizes intuitive multi-touch gestures:</p>
+        <ul>
+            <li><strong>Orbit:</strong> Swipe with a single finger to rotate the model.</li>
+            <li><strong>Pan:</strong> Drag with two fingers to slide the model across the screen.</li>
+            <li><strong>Zoom:</strong> Pinch two fingers together to zoom out, or spread them apart to zoom in.</li>
+        </ul>
+        <img src="images/04-android-touch.png" alt="Android Touch">
+        <p><em>Figure 4: Android Tablet Touch Gestures</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 4</div>
+    </div>
+
+    <div class="page">
+        <h2>5. Model Outliner & Hierarchy</h2>
+        <p>Ship models are highly complex assemblies. The Model Tree (Outliner) helps you isolate specific sections of the ship.</p>
+        <p>Click the <strong>Tree Icon</strong> to open the hierarchy. You can toggle the visibility of individual decks, frames, or equipment by clicking the Eye icon next to the component name.</p>
+        <img src="images/05-model-tree.png" alt="Model Tree">
+        <p><em>Figure 5: Model Outliner & Hierarchy</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 5</div>
+    </div>
+
+    <div class="page">
+        <h2>6. Measurement Tool (Distance)</h2>
+        <p>Accurate dimensions are critical in shipbuilding. Use the Measurement Tool to verify distances between structural members directly within the viewer.</p>
+        <p>Click the <strong>Ruler Icon</strong>, select your start point on the model, and then select your end point to view the exact linear dimension.</p>
+        <img src="images/06-measurement-tool.png" alt="Measurement Tool">
+        <p><em>Figure 6: Distance Measurement Tool</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 6</div>
+    </div>
+
+    <div class="page">
+        <h2>7. Cross-Section Slicing</h2>
+        <p>To inspect internal compartments, tanks, and bulkheads, activate the Section Plane tool.</p>
+        <p>Click the <strong>Section Icon</strong> to generate a cutting plane. You can push or pull this plane along the X, Y, or Z axis to reveal the internal cross-section of the ship block.</p>
+        <img src="images/07-section-plane.png" alt="Section Plane">
+        <p><em>Figure 7: Cross-Section Slicing</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 7</div>
+    </div>
+
+    <div class="page">
+        <h2>8. Display & Color Settings</h2>
+        <p>Adjust the visual output to suit your environment. If you are reviewing models outdoors on a tablet, adjusting contrast can help.</p>
+        <p>Click the <strong>Settings Icon</strong> to access the Color Manager. Here, you can switch between Light and Dark themes or override component colors to highlight specific systems.</p>
+        <img src="images/08-display-settings.png" alt="Display Settings">
+        <p><em>Figure 8: Display & Color Settings</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 8</div>
+    </div>
+
+    <div class="page">
+        <h2>9. Angle Measuring</h2>
+        <p>Checking the correct inclination of brackets, chamfers, and stiffener alignments is crucial. The Angle Measuring tool allows for precise verification.</p>
+        <p>Click the <strong>Angle Tool Icon</strong>. Select three points: the vertex (corner) first, followed by the two end points along the intersecting edges. The viewer will calculate and display the included angle in degrees.</p>
+        <img src="images/09-angle-measuring.png" alt="Angle Measuring">
+        <p><em>Figure 9: Angle Measuring Tool</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 9</div>
+    </div>
+
+    <div class="page">
+        <h2>10. Girth Measurement</h2>
+        <p>The Girth tool calculates the perimeter or curved length of hull sections, pipe runs, and plate contours.</p>
+        <p>Select the <strong>Girth Icon</strong> and click on a continuous edge or boundary loop. The viewer will output the total cumulative length of the selected geometry.</p>
+        <img src="images/10-girth-measurement.png" alt="Girth Measurement">
+        <p><em>Figure 10: Girth Measurement Tool</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 10</div>
+    </div>
+
+    <div class="page">
+        <h2>11. View Options</h2>
+        <p>Quickly snap the camera to standard engineering perspectives using the View Options menu.</p>
+        <p>Available presets include: <strong>Top, Bottom, Port (Left), Starboard (Right), Forward (Front), Aft (Back), and Isometric</strong>. These views are essential for aligning the 3D model with 2D profile drawings.</p>
+        <img src="images/11-view-options.png" alt="View Options">
+        <p><em>Figure 11: View Options and Presets</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 11</div>
+    </div>
+
+    <div class="page">
+        <h2>12. Multi-Selection</h2>
+        <p>Perform batch operations on several components at once using Multi-Selection.</p>
+        <p>Hold the <strong>Ctrl / Cmd</strong> key while clicking to select multiple individual parts, or use the <strong>Box Select</strong> tool to draw a rectangle over an entire bulkhead to select all attached stiffeners and plates simultaneously.</p>
+        <img src="images/12-multi-selection.png" alt="Multi Selection">
+        <p><em>Figure 12: Multi-Selection Tool</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 12</div>
+    </div>
+
+    <div class="page">
+        <h2>13. Isolation Mode</h2>
+        <p>When inspecting a complex assembly (like an engine room), surrounding structures can obstruct your view. Isolation Mode solves this.</p>
+        <p>Select a specific part or piping spool, right-click, and choose <strong>Isolate</strong>. All unselected parts will instantly become hidden, leaving only your target geometry on screen.</p>
+        <img src="images/13-isolation-mode.png" alt="Isolation Mode">
+        <p><em>Figure 13: Isolation Mode</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 13</div>
+    </div>
+
+    <div class="page">
+        <h2>14. X-Ray Mode</h2>
+        <p>X-Ray Mode applies a global transparency effect to the entire model.</p>
+        <p>Activating X-Ray allows you to see right through the outer hull plating to inspect the internal structural framework, piping runs, and tank boundaries without completely hiding the exterior shell.</p>
+        <img src="images/14-xray-mode.png" alt="X-Ray Mode">
+        <p><em>Figure 14: X-Ray / Transparent Mode</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 14</div>
+    </div>
+
+    <div class="page">
+        <h2>15. Hide / Unhide</h2>
+        <p>For granular visibility control, you can temporarily remove obstructing elements from the viewport.</p>
+        <p>Select any part and click the <strong>Hide</strong> button to make it invisible. To restore it, click <strong>Unhide All</strong> from the main toolbar or locate the hidden part in the Model Tree and click its eye icon.</p>
+        <img src="images/15-hide-unhide.png" alt="Hide Unhide">
+        <p><em>Figure 15: Hide and Unhide Functionality</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 15</div>
+    </div>
+
+    <div class="page">
+        <h2>16. Sunlight Settings</h2>
+        <p>Visualize how shadows will fall across the vessel during different times of the day using Sunlight Settings.</p>
+        <p>Adjust the sliders for <strong>Azimuth</strong> (Sun direction) and <strong>Elevation</strong> (Sun height) to cast accurate dynamic shadows over the ship's superstructure and dry dock environment.</p>
+        <img src="images/16-sunlight-settings.png" alt="Sunlight Settings">
+        <p><em>Figure 16: Sunlight and Shadow Settings</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 16</div>
+    </div>
+
+    <div class="page">
+        <h2>17. Add Files (Appending)</h2>
+        <p>The CSL CAD VIEWER allows you to combine multiple CAD files into a single scene.</p>
+        <p>Use the <strong>Add File</strong> button to load secondary models—such as a piece of outfitting equipment (.stp) or a piping layout (.dxf)—and overlay it onto your currently loaded hull block (.3dcsl) to check for clashes.</p>
+        <img src="images/17-add-files.png" alt="Add Files">
+        <p><em>Figure 17: Adding/Appending Multiple Files</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 17</div>
+    </div>
+
+    <div class="page">
+        <h2>18. Scene Management</h2>
+        <p>Customize the rendering environment of your workspace using the Scene options.</p>
+        <p>Here you can toggle the visibility of the reference grid, adjust the global bounding box display, and change the environmental skybox or background gradient to enhance model contrast.</p>
+        <img src="images/18-scene-management.png" alt="Scene Management">
+        <p><em>Figure 18: Scene Environment Settings</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 18</div>
+    </div>
+
+    <div class="page">
+        <h2>19. Camera Controls</h2>
+        <p>Switch between different mathematical camera projection models depending on your task.</p>
+        <p>Toggle between <strong>Perspective Mode</strong> (realistic, human-eye view, ideal for 3D walkthroughs) and <strong>Orthographic Mode</strong> (parallel lines, no depth distortion, required for 2D dimension checking and DXF viewing).</p>
+        <img src="images/19-camera-controls.png" alt="Camera Controls">
+        <p><em>Figure 19: Perspective vs. Orthographic Camera Toggle</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 19</div>
+    </div>
+
+    <div class="page">
+        <h2>20. Search Function</h2>
+        <p>Instantly locate specific structural members within massive ship assemblies using the Search Function.</p>
+        <p>Click the <strong>Magnifying Glass</strong>, type the Part ID, material code, or layer name (e.g., "WebFrame_Aft"), and the viewer will automatically select the part and zoom the camera directly to it.</p>
+        <img src="images/20-search-function.png" alt="Search Function">
+        <p><em>Figure 20: Part Search and Filtering</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 20</div>
+    </div>
+
+    <div class="page">
+        <h2>21. Model Info</h2>
+        <p>Extract crucial engineering metadata directly from the loaded CAD geometry.</p>
+        <p>Select a part and click the <strong>Info ( i ) Icon</strong> to display its properties, including surface area, bounding box dimensions, volume, layer assignment, and original CAD material data.</p>
+        <img src="images/21-model-info.png" alt="Model Info">
+        <p><em>Figure 21: Model Information and Metadata</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 21</div>
+    </div>
+
+    <div class="page">
+        <h2>22. Screen Size & Line Weight</h2>
+        <p>Optimize the display for DXF drawings and wireframe meshes.</p>
+        <p>Use the <strong>Line Weight</strong> slider to thicken 2D CAD lines for better visibility on high-resolution monitors. The <strong>Screen Size / Fullscreen</strong> toggle maximizes the viewport across your entire monitor or tablet display.</p>
+        <img src="images/22-screen-line-weight.png" alt="Screen Size and Line Weight">
+        <p><em>Figure 22: Screen Size and Line Weight Controls</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 22</div>
+    </div>
+
+    <div class="page">
+        <h2>23. Opened Tabs & Global Selection</h2>
+        <p>The viewer supports a multi-document interface. You can load several different hull blocks or drawings simultaneously in <strong>Opened Tabs</strong> across the top of the screen.</p>
+        <p>Within any active tab, use the <strong>Select Whole Model</strong> or <strong>Hide Whole Model</strong> buttons to quickly apply global actions to everything currently loaded in that specific tab without affecting the others.</p>
+        <img src="images/23-opened-tabs.png" alt="Opened Tabs">
+        <p><em>Figure 23: Opened Tabs & Whole Model Management</em></p>
+        <div class="footer">CSL CAD VIEWER Manual - Page 23</div>
+    </div>
+</body>
+</html>
